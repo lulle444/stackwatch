@@ -1,0 +1,24 @@
+name: Warm data
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+jobs:
+  warm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Pages and data
+        env:
+          SITE: https://stackwatch-neon.vercel.app
+        run: |
+          for p in / /dollars /stocks /how; do echo "$p $(curl -s -o /dev/null -w '%{http_code} %{time_total}s' $SITE$p)"; done
+          curl -s -w '\nHTTP %{http_code} in %{time_total}s\n' "$SITE/api/data" -o data.json
+          node -e '
+            const d = require("./data.json");
+            console.log("errors:", d.errors, "server ms:", d.ms);
+            const D = d.dollars;
+            if (D){ console.log("T-bill", D.tbill, "yields", D.count, "tvl", D.tvl);
+              for (const c of D.cats) console.log(" ", c.id, c.median, c.count, c.options.map(o => o.name + " " + o.apy).join(" | ")); }
+            for (const s of d.stocks || []) console.log(" ", s.ticker, s.sym, s.price, s.share, s.gap != null ? (s.gap * 100).toFixed(2) + "%" : "-", s.liquidity, s.week ? (s.week.change * 100).toFixed(2) + "%" : "no week");
+          '
