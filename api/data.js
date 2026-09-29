@@ -4,7 +4,7 @@
 const SRC = {
   rates: process.env.RATES_URL || "https://ratewatch-lemon.vercel.app/api/rates",
   board: process.env.BOARD_URL || "https://usepegwatch.vercel.app/api/board",
-  hist: process.env.HISTORY_URL || "https://www.usetidewatch.org/api/stock-history?symbol=",
+  hist: process.env.HISTORY_URL || "https://tidewatch-olive.vercel.app/api/stock-history?symbol=",
 };
 const THIN = 10000;       // stock markets shallower than this move on small trades: left out
 const DAY = 864e5;
@@ -49,7 +49,7 @@ async function week(list){
       if (pts.length < 2) return;
       const last = pts[pts.length - 1], first = pts.find(p => p[0] >= now - 7 * DAY);
       if (!first || last[0] - first[0] < 5 * DAY) return;
-      s.week = {from: first[0], change: last[3] / first[3] - 1};
+      s.week = {from: first[0], days: Math.round((last[0] - first[0]) / DAY), change: last[3] / first[3] - 1};
     } catch (e) { /* no week for this one */ }
   }));
 }
