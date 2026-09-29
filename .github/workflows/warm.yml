@@ -14,8 +14,10 @@ jobs:
         run: |
           for p in / /dollars /stocks /how; do echo "$p $(curl -s -o /dev/null -w '%{http_code} %{time_total}s' $SITE$p)"; done
           curl -s -w '\nHTTP %{http_code} in %{time_total}s\n' "$SITE/api/data" -o data.json
-          curl -sS -o /dev/null -w 'tidewatch history HTTP %{http_code} redirect=%{redirect_url}\n' 'https://www.usetidewatch.org/api/stock-history?symbol=NVDA'
-          curl -sL 'https://www.usetidewatch.org/api/stock-history?symbol=NVDA' | node -e 'let s="";process.stdin.on("data",c=>s+=c).on("end",()=>{try{const p=JSON.parse(s).points||[];console.log("tidewatch NVDA points",p.length,p[0]&&new Date(p[0][0]).toISOString(),p.length&&new Date(p[p.length-1][0]).toISOString())}catch(e){console.log("tidewatch history:",s.slice(0,200))}})'
+          for h in www.usetidewatch.org usetidewatch.org tidewatch-olive.vercel.app; do
+            echo "$h: $(getent hosts $h | head -1) $(curl -sS -o /dev/null -w 'HTTP %{http_code} -> %{redirect_url}' "https://$h/api/stock-history?symbol=NVDA" 2>&1)"
+          done
+          curl -sL 'https://tidewatch-olive.vercel.app/api/stock-history?symbol=NVDA' | head -c 300; echo
           node -e '
             const d = require("./data.json");
             console.log("errors:", d.errors, "server ms:", d.ms);
