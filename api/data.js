@@ -17,7 +17,8 @@ async function get(url, ms){
 
 // Dollars: the four types from safest to riskiest, each with its median and its six largest yields
 function dollars(b){
-  const pick = r => ({name: r.name, symbol: r.symbol, apy: r.apy30 != null ? +r.apy30.toFixed(2) : null, tvl: Math.round(r.tvl), chains: r.chains, slug: r.slug});
+  const label = r => r.symbol && !r.name.toLowerCase().includes(r.symbol.toLowerCase()) ? `${r.name} ${r.symbol}` : r.name;
+  const pick = r => ({name: label(r), symbol: r.symbol, apy: r.apy30 != null ? +r.apy30.toFixed(2) : null, tvl: Math.round(r.tvl), chains: r.chains, slug: r.slug});
   return {
     tbill: b.tbill,
     count: b.rows.length, tvl: Math.round(b.tvl),

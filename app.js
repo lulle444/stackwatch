@@ -9,6 +9,7 @@
   const sgn = (x, d = 2) => (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(x).toFixed(d);
   const px = x => "$" + (x >= 100 ? x.toFixed(2) : x >= 1 ? x.toFixed(3) : x.toPrecision(3));
   const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"})[c]);
+  const WHY = {tbill: "The interest on short US government debt, minus the fund's fee.", savings: "The protocol sets it from its loans and reserves.", synthetic: "It comes from funding rates and trading strategies, so it moves with the market.", lending: "It floats with borrowing demand; the risk is the borrowers."};
   const SHORT = {tbill: "T-bill funds", savings: "Savings", synthetic: "Synthetic", lending: "Lending"};
 
   // ---- inputs
@@ -59,7 +60,7 @@
           vs = `<p>A 3-month T-bill at ${pct(tb.rate)} would pay ${usd(t)}. That's <strong class="${diff >= 0 ? "pos" : "neg"}">${usd(Math.abs(diff))} ${diff >= 0 ? "more" : "less"}</strong>${diff >= 0 ? ", paid for with risk" : ""}.</p>`;
         }
         h += `<div class="leg"><div class="leg-h"><span><i class="dot d"></i>${usd(aD)} in ${esc(o ? o.name : c.name)}</span><b class="pos">+${usd(year)}/yr</b></div>
-          <p>At ${pct(r)} a year${o ? "" : ", the median of " + esc(c.name)}, if the rate holds. ${esc(c.short || "")}</p>${vs}</div>`;
+          <p>At ${pct(r)} a year${o ? "" : ", the median of " + esc(c.name)}, if the rate holds. ${WHY[c.id] || ""}</p>${vs}</div>`;
       }
     }
     if (aS > 0){
