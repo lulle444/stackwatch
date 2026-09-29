@@ -120,3 +120,86 @@ nav a.on{color:var(--ink);font-weight:700}
 .more h3{margin:10px 0 6px;font-size:20px}.more p{margin:0 0 14px;color:var(--muted)}.more b{color:var(--acc)}
 @media (max-width:980px){.more{grid-template-columns:1fr}}
 @media (max-width:980px){nav{display:flex;gap:18px;margin-left:0;overflow-x:auto;font-size:15px}.nav{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:10px;row-gap:8px}nav{order:3;width:100%}}
+
+/* ---------- Exclusive edition: ivory paper, serif display, hairlines, champagne details ---------- */
+:root{--bg:#F5F2EB;--panel:#FFFEFB;--ink:#16151C;--muted:#6E6A75;--line:#E3DDD1;--soft:#F3EFE6;
+  --acc:#43369E;--accSoft:#EEEAF6;--gold:#A8864E;--goldSoft:#E9DFC8;--d:#1E6B4C;--s:#5A4BC4;--up:#1E6B4C;--down:#A33A2E;
+  --mono:Manrope,system-ui,sans-serif}
+body{background:var(--bg);font-feature-settings:"tnum" 1,"lnum" 1;letter-spacing:.005em}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+em{color:var(--acc)}
+/* tape: quiet ink band with champagne marks */
+.tape{height:32px;background:#15141B;color:#A9A4B4;font:500 11px var(--sans);letter-spacing:.18em}
+.tape-in span::before{background:var(--gold);width:4px;height:4px}
+.tape-in b,.tape-in b.g{color:#F1E9D8;font-weight:600}
+/* header */
+.top{background:rgba(245,242,235,.9);border-bottom:1px solid var(--line)}
+.nav{height:76px}
+.brand{font:400 27px var(--serif);letter-spacing:-.005em}
+.brand img{border-radius:8px}
+nav{gap:34px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+nav a.on{color:var(--ink);box-shadow:inset 0 -1px 0 var(--gold);padding-bottom:3px}
+.btn{border-radius:999px;font-weight:600;letter-spacing:.02em;border-color:var(--line);background:transparent}
+.btn.dark{background:var(--ink);border-color:var(--ink)}
+.btn.big{padding:16px 30px;font-size:16px;border-radius:999px}
+/* hero */
+.hero{padding-top:96px;padding-bottom:110px;gap:72px}
+.hero::before{background:radial-gradient(700px 360px at 12% 10%,rgba(233,223,200,.7) 0%,transparent 70%),radial-gradient(560px 320px at 92% 0%,rgba(238,234,246,.9) 0%,transparent 70%)}
+.pill{background:transparent;border:1px solid var(--goldSoft);color:var(--gold);font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:9px 16px}
+.pill i{background:var(--gold);width:5px;height:5px}
+h1{font:400 clamp(52px,7vw,94px)/.98 var(--serif);letter-spacing:-.02em;margin:30px 0 26px}
+h1 em{font-size:1em;letter-spacing:-.02em}
+.lede{font-size:19px;line-height:1.65;max-width:520px}
+.cta{margin:40px 0 56px}
+.stats{gap:0;border-top:1px solid var(--line);padding-top:26px;max-width:520px;justify-content:space-between}
+.stats b{font:400 44px/1 var(--serif);letter-spacing:-.01em;margin-bottom:6px}
+.stats span{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+/* simulator */
+.sim{border-radius:28px;padding:34px;border-color:var(--line);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 50px 100px -60px rgba(30,20,60,.45),0 0 0 6px rgba(255,254,251,.6)}
+.sim-h{font:600 11px var(--sans);letter-spacing:.2em;color:var(--gold);padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.lab{font:600 11px var(--sans);letter-spacing:.18em}
+.amt{border-bottom:1px solid var(--line)}
+.amt span{font:400 34px var(--serif)}
+.amt input{font:400 58px var(--serif);letter-spacing:-.01em}
+.chips button,.tabs button{font-weight:500;border-color:var(--line);background:transparent}
+.chips button.on{background:var(--ink);border-color:var(--ink)}
+.tabs button.on{background:var(--ink);border-color:var(--ink)}
+.stk button{font-family:var(--sans);letter-spacing:.04em}
+input[type=range]{height:4px}
+input[type=range]::-webkit-slider-thumb{width:22px;height:22px;border:1px solid var(--ink);box-shadow:0 0 0 5px rgba(22,21,28,.06)}
+select{border-color:var(--line);background:transparent}
+.out{background:linear-gradient(180deg,#FBF8F1,#F6F1E6);border-color:var(--goldSoft);border-radius:20px;padding:22px 24px}
+.leg{border-bottom:1px solid var(--goldSoft)}
+.leg-h b{font:400 30px/1 var(--serif);letter-spacing:0}
+.total b{font:400 38px/1 var(--serif)}
+.total span{font:600 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+/* sections */
+.band{padding:112px 0}
+.band.page{padding-top:88px}
+.band.alt{background:var(--panel)}
+.eyebrow{font:600 11px var(--sans);letter-spacing:.24em;color:var(--gold)}
+.sec-h h2{font:400 clamp(40px,5vw,66px)/1.02 var(--serif);letter-spacing:-.015em;margin:16px 0 16px}
+.sec-h p{font-size:18px;line-height:1.65}
+.cat,.steps div,.more a{border-radius:22px;padding:28px;border-color:var(--line);background:var(--panel)}
+.band.alt .more a{background:var(--bg)}
+.cat h3{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.cat .r{font:400 58px/1 var(--serif);letter-spacing:-.01em;margin:18px 0 8px}
+.cat .vs{font:500 13px var(--sans)}
+.bench{font-weight:500;color:var(--muted)}.bench i{border-top:1px dashed var(--ink)}
+th{font:600 11px var(--sans);letter-spacing:.16em;background:var(--soft)}
+.tbl{border-radius:22px;background:var(--panel)}
+td .tk{font:600 15px var(--sans);letter-spacing:.04em}
+.steps b{background:transparent;border:1px solid var(--goldSoft);color:var(--gold);border-radius:50%;font:400 18px var(--serif)}
+.steps h3,.more h3{font:400 28px/1.1 var(--serif);letter-spacing:-.005em}
+.more b{font-weight:600;color:var(--ink);box-shadow:inset 0 -1px 0 var(--gold)}
+.more a:hover{border-color:var(--gold)}
+.risk{background:#16151C;border-radius:24px;padding:40px 44px}
+.risk h3{font:400 34px var(--serif);color:#F1E9D8}
+.foot{border-top:1px solid var(--line);padding-top:56px}
+.foot .brand{font-size:24px}
+.upd{font:500 11px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:980px){nav{font-size:12px;gap:22px}.hero{padding-top:48px}}
+@media (max-width:560px){.sim{padding:22px}.amt input{font-size:46px}.stats b{font-size:34px}.band{padding:80px 0}.risk{padding:28px}}
+nav a{white-space:nowrap}
+@media (max-width:560px){.pill{letter-spacing:.12em;font-size:11px}nav a.on{padding-bottom:2px}}

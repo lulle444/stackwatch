@@ -70,7 +70,7 @@
         const n = aS / s.price, shares = n * s.mult;
         known = false;
         const gap = s.gap != null ? `The token trades <strong class="${Math.abs(s.gap) < 0.005 ? "" : s.gap > 0 ? "neg" : "pos"}">${pct(Math.abs(s.gap * 100))} ${s.gap >= 0 ? "above" : "below"}</strong> the real share (${px(s.share)}).` : "";
-        const wk = s.week ? ` Over the last ${s.week.days} days it moved <strong class="${s.week.change >= 0 ? "pos" : "neg"}">${sgn(s.week.change * 100)}%</strong>: ${usd(aS)} then would be ${usd(aS * (1 + s.week.change))} now.` : "";
+        const wk = s.week ? ` Over the last ${s.week.days || 7} days it moved <strong class="${s.week.change >= 0 ? "pos" : "neg"}">${sgn(s.week.change * 100)}%</strong>: ${usd(aS)} then would be ${usd(aS * (1 + s.week.change))} now.` : "";
         h += `<div class="leg"><div class="leg-h"><span><i class="dot s"></i>${usd(aS)} in ${esc(s.ticker)}</span><b>${n >= 1 ? n.toFixed(3) : n.toPrecision(3)} ${esc(s.ticker)}</b></div>
           <p>At ${px(s.price)} on Robinhood Chain${Math.abs(s.mult - 1) > 1e-6 ? `, where one token stands for ${s.mult.toFixed(4)} shares (${shares.toPrecision(4)} shares)` : ""}. ${gap}${wk}</p>
           <p>It pays no rate. If ${esc(s.ticker)} moves 10%, this part moves about ${usd(aS * 0.1)}.</p></div>`;
