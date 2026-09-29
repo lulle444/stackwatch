@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stock tokens on Robinhood Chain · Stackwatch</title>
+<meta name="description" content="Stock tokens on Robinhood Chain: on-chain price, gap to the real share, the last 7 days and market depth.">
+<meta property="og:title" content="Stock tokens on Robinhood Chain · Stackwatch">
+<meta property="og:description" content="Stock tokens on Robinhood Chain: on-chain price, gap to the real share, the last 7 days and market depth.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="/api/data" as="fetch" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/styles.css?v=776c13f815">
+</head><body>
+
+<div class="tape" aria-hidden="true"><div class="tape-in" id="tape"></div></div>
+
+<header class="top"><div class="wrap nav">
+  <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="34" height="34"><span>Stackwatch</span></a>
+  <nav><a href="/">Try a deposit</a><a href="/dollars">Dollars</a><a href="/stocks" class=on aria-current=page>Stocks</a><a href="/how">How it works</a></nav>
+  <a class="btn dark" href="/#try">Try it</a>
+</div></header>
+
+<main>
+<section class="band page" id="stocks"><div class="wrap">
+  <div class="sec-h"><span class="eyebrow">Stocks</span><h2>Stock tokens on <em>Robinhood Chain.</em></h2>
+  <p>A stock token pays no rate. It moves with the share, and it can trade a little above or below it.</p></div>
+  <div class="tbl"><table><thead><tr><th>Stock</th><th class="n">On chain</th><th class="n">vs the share</th><th class="n">7 days</th><th class="n hide-s">Market depth</th></tr></thead><tbody id="stkRows"><tr><td colspan="5" class="skel">Loading…</td></tr></tbody></table></div>
+  <p class="src">Prices from <a href="https://usepegwatch.vercel.app" rel="noopener">Pegwatch</a>, 7-day moves from <a href="https://www.usetidewatch.org" rel="noopener">Tidewatch</a>. Robinhood's stock tokens are not for US persons or UK residents.</p>
+</div></section>
+
+</main>
+
+<footer class="foot"><div class="wrap">
+  <div class="brand"><img src="/assets/logo.svg" alt="" width="28" height="28"><span>Stackwatch</span></div>
+  <p>Dollars or stocks, on chain. Free, no sign-up. Not financial advice.</p>
+  <p class="upd" id="upd"></p>
+</div></footer>
+
+<script src="/app.js?v=776c13f815" defer></script>
+</body></html>

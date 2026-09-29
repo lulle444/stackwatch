@@ -1,6 +1,6 @@
 // Stackwatch: the simulated deposit, the dollar cards and the stock table, all from /api/data.
 (function(){
-  const $ = id => document.getElementById(id);
+  const $ = id => document.getElementById(id) || document.createElement("div");   // pages carry only some of the parts
   const S = {data: null, amount: 1000, mix: 70, cat: "tbill", y: -1, stock: null};
 
   const usd = (x, d) => "$" + x.toLocaleString("en-US", {minimumFractionDigits: d ?? (Math.abs(x) < 1000 ? 2 : 0), maximumFractionDigits: d ?? (Math.abs(x) < 1000 ? 2 : 0)});
