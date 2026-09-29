@@ -1,0 +1,6 @@
+{
+  "name": "stackwatch",
+  "private": true,
+  "description": "Dollars or stocks, on chain: a simulated deposit with live numbers from Ratewatch, Pegwatch and Tidewatch.",
+  "engines": {"node": ">=18"}
+}

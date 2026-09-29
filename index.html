@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stackwatch · Dollars or stocks, on chain</title>
+<meta name="description" content="Try a deposit, no wallet needed: see what a dollar earns on chain next to the T-bill rate, and what a stock token on Robinhood Chain gets you. Live numbers, simulated deposits.">
+<meta property="og:title" content="Stackwatch · Dollars or stocks, on chain">
+<meta property="og:description" content="Put $100 to work on chain. Try a deposit with live numbers, no wallet needed.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="/api/data" as="fetch" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head><body>
+
+<div class="tape" aria-hidden="true"><div class="tape-in" id="tape"></div></div>
+
+<header class="top"><div class="wrap nav">
+  <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="34" height="34"><span>Stackwatch</span></a>
+  <nav><a href="#try">Try a deposit</a><a href="#dollars">Dollars</a><a href="#stocks">Stocks</a><a href="#how">How it works</a></nav>
+  <a class="btn dark" href="#try">Try it</a>
+</div></header>
+
+<main>
+<section class="hero wrap">
+  <div class="hero-l">
+    <span class="pill"><i></i>Live numbers · no wallet needed</span>
+    <h1>Put your money to work <em>on chain.</em></h1>
+    <p class="lede">Dollars or stocks? Try a deposit and see what a dollar earns next to the T-bill, and what a stock token on Robinhood Chain gets you. Simulated, with today's real numbers.</p>
+    <div class="cta"><a class="btn dark big" href="#try">Try a deposit</a><a class="btn big" href="#how">How it works</a></div>
+    <div class="stats">
+      <div><b id="stTbill">–</b><span>3-month T-bill</span></div>
+      <div><b id="stYields">–</b><span>dollar yields</span></div>
+      <div><b id="stStocks">–</b><span>stock tokens</span></div>
+    </div>
+  </div>
+
+  <div class="sim" id="try">
+    <div class="sim-h"><span>Try a deposit · simulated</span><span>No wallet needed</span></div>
+
+    <label class="lab" for="amt">Amount</label>
+    <div class="amt"><span>$</span><input id="amt" inputmode="decimal" value="1,000" aria-label="Amount in dollars"></div>
+    <div class="chips" id="amtChips"><button data-a="100">$100</button><button data-a="1000" class="on">$1,000</button><button data-a="10000">$10,000</button><button data-a="100000">$100,000</button></div>
+
+    <div class="split">
+      <div class="split-l"><span class="dot d"></span>Dollars <b id="pD">70%</b></div>
+      <div class="split-l r">Stocks <b id="pS">30%</b><span class="dot s"></span></div>
+    </div>
+    <input type="range" id="mix" min="0" max="100" step="10" value="70" aria-label="Share in dollars">
+
+    <div class="pick" id="pickD">
+      <div class="lab">Dollars go to</div>
+      <div class="tabs" id="cats"></div>
+      <select id="yield" aria-label="Which yield"></select>
+    </div>
+    <div class="pick" id="pickS">
+      <div class="lab">Stocks go to</div>
+      <div class="chips stk" id="stks"></div>
+    </div>
+
+    <div class="out" id="out"><div class="skel">Loading today's numbers…</div></div>
+  </div>
+</section>
+
+<section class="band" id="dollars"><div class="wrap">
+  <div class="sec-h"><span class="eyebrow">Dollars</span><h2>What a dollar earns, <em>held to the T-bill.</em></h2>
+  <p>Median yield of each type over 30 days. Anything above the T-bill is paid for with risk.</p></div>
+  <div class="cats" id="catCards"></div>
+  <p class="src">Data from <a href="https://ratewatch-lemon.vercel.app" rel="noopener">Ratewatch</a>, which tracks every dollar yield on chain.</p>
+</div></section>
+
+<section class="band alt" id="stocks"><div class="wrap">
+  <div class="sec-h"><span class="eyebrow">Stocks</span><h2>Stock tokens on <em>Robinhood Chain.</em></h2>
+  <p>A stock token pays no rate. It moves with the share, and it can trade a little above or below it.</p></div>
+  <div class="tbl"><table><thead><tr><th>Stock</th><th class="n">On chain</th><th class="n">vs the share</th><th class="n">7 days</th><th class="n hide-s">Market depth</th></tr></thead><tbody id="stkRows"><tr><td colspan="5" class="skel">Loading…</td></tr></tbody></table></div>
+  <p class="src">Prices from <a href="https://usepegwatch.vercel.app" rel="noopener">Pegwatch</a>, 7-day moves from <a href="https://www.usetidewatch.org" rel="noopener">Tidewatch</a>. Robinhood's stock tokens are not for US persons or UK residents.</p>
+</div></section>
+
+<section class="band" id="how"><div class="wrap how">
+  <div class="sec-h"><span class="eyebrow">How it works</span><h2>A simulator, <em>not a vault.</em></h2></div>
+  <div class="steps">
+    <div><b>1</b><h3>Pick an amount and a split</h3><p>Choose how much goes to dollars and how much to stocks. Nothing leaves your wallet; there is no wallet.</p></div>
+    <div><b>2</b><h3>Dollars earn a rate</h3><p>We take each yield's 30-day rate and show what it pays in a year if the rate holds, next to the 3-month T-bill. Rates change every day.</p></div>
+    <div><b>3</b><h3>Stocks move with the share</h3><p>We show how many tokens your money buys at today's on-chain price, how far the token sits from the real share, and its last 7 days.</p></div>
+  </div>
+  <div class="risk">
+    <h3>Before you move real money</h3>
+    <ul>
+      <li><b>A rate above the T-bill is paid for with risk:</b> smart-contract bugs, lending defaults, or a synthetic dollar losing its peg.</li>
+      <li><b>Tokenized T-bill funds</b> often limit who can hold them. Most are closed to US retail.</li>
+      <li><b>Robinhood stock tokens</b> are debt securities from a Jersey company, not shares, and are not for US persons or UK residents.</li>
+      <li><b>Past moves are not future moves.</b> This is a simulator with live numbers, not financial advice.</li>
+    </ul>
+  </div>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <div class="brand"><img src="/assets/logo.svg" alt="" width="28" height="28"><span>Stackwatch</span></div>
+  <p>Dollars or stocks, on chain. Free, no sign-up. Not financial advice.</p>
+  <p class="sis">Sister sites: <a href="https://ratewatch-lemon.vercel.app">Ratewatch</a> · <a href="https://usepegwatch.vercel.app">Pegwatch</a> · <a href="https://www.usetidewatch.org">Tidewatch</a></p>
+  <p class="upd" id="upd"></p>
+</div></footer>
+
+<script src="/app.js" defer></script>
+</body></html>
